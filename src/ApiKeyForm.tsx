@@ -16,10 +16,10 @@ const ApiKeyForm: React.FC<{ onSubmit: (apiKey: string) => void }> = ({ onSubmit
           setUserApiKey("");
           setError(null);
         } else {
-          setError("Clé API incorrecte. Veuillez entrer une clé valide.");
+          setError("Clé d' API incorrecte. Veuillez entrer une clé valide.  Essayer avec ca '7733263982f2fbede06debb35a9009ff' ou avec votre propre clé d'API");
         }
       } catch (error) {
-        setError("Erreur lors de la vérification de la clé API.");
+        setError("Erreur lors de la vérification de la clé API. Essayer avec ca '7733263982f2fbede06debb35a9009ff' ou avec votre propre clé d'API");
       }
     } else {
       setError("Veuillez entrer une clé d'API valide.");
