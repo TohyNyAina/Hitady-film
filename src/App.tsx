@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './styles/movie-search.css';
 import ApiKeyForm from "./ApiKeyForm"; // Importez votre composant ApiKeyForm
 import { searchMoviesWithUserApiKey } from "./api/moovie";
@@ -7,15 +7,23 @@ const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [movies, setMovies] = useState<any[]>([]);
-  const [error, setError] = useState<string | null>(null); // Ajout de l'état d'erreur
+  const [error, setError] = useState<string | null>(null);
   const [apiKey, setApiKey] = useState<string | null>(null);
+
+  // Ajoutez une fonction pour vérifier la clé API au chargement de l'application
+  useEffect(() => {
+    const savedApiKey = localStorage.getItem('apikey');
+    if (savedApiKey) {
+      setApiKey(savedApiKey);
+    }
+  }, []);
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim() !== "" && apiKey !== null) {
       setIsLoading(true);
       setError(null);
-  
+
       try {
         const moviedata = await searchMoviesWithUserApiKey(searchTerm, apiKey);
         setMovies(moviedata);
@@ -28,24 +36,23 @@ const App: React.FC = () => {
       }
     }
   };
-  
 
   function truncateOverview(overview: string, wordLimit: number): string {
     const words = overview.split(" ");
-
+  
     if (words.length <= wordLimit) {
       return overview;
     }
-
+  
     const truncatedText = words.slice(0, wordLimit).join(" ");
     return `${truncatedText} ...`;
   }
 
   return (
     <div>
-      {apiKey ? ( // Vérifier si une clé API est disponible
+      {apiKey ? (
         <div>
-          <h1>Rechercher votre films préferé?</h1>
+          <h1>Rechercher votre film préféré?</h1>
           <div className="search-bar">
             <form onSubmit={handleSearch}>
               <input
@@ -63,7 +70,7 @@ const App: React.FC = () => {
           </div>
           <hr />
 
-          {error && <div className="error-message">{error}</div>} {/* Affichage de l'erreur */}
+          {error && <div className="error-message">{error}</div>}
 
           <div
             style={{
@@ -108,7 +115,6 @@ const App: React.FC = () => {
           </div>
         </div>
       ) : (
-        // Si aucune clé API n'est définie, afficher le formulaire d'entrée de la clé API
         <ApiKeyForm onSubmit={setApiKey} />
       )}
     </div>
