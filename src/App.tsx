@@ -10,7 +10,7 @@ const App: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [apiKey, setApiKey] = useState<string | null>(null);
 
-  // Ajoutez une fonction pour vérifier la clé API au chargement de l'application
+
   useEffect(() => {
     const savedApiKey = localStorage.getItem('apikey');
     if (savedApiKey) {
