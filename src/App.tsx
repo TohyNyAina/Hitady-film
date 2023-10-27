@@ -22,7 +22,7 @@ const App: React.FC = () => {
         setSearchTerm('');
       } catch (error) {
         console.error("Error in handleSearch:", error);
-        setError("Une erreur s'est produite lors de la recherche. Veuillez réessayer.");
+        setError("API Key invalide");
       } finally {
         setIsLoading(false);
       }
@@ -45,7 +45,7 @@ const App: React.FC = () => {
     <div>
       {apiKey ? ( // Vérifier si une clé API est disponible
         <div>
-          <h1>Looking for a movie?</h1>
+          <h1>Rechercher votre films préferé?</h1>
           <div className="search-bar">
             <form onSubmit={handleSearch}>
               <input

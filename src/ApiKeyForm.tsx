@@ -11,9 +11,11 @@ const ApiKeyForm: React.FC<{ onSubmit: (apiKey: string) => void }> = ({ onSubmit
       setUserApiKey("");
       setError(null);
     } else {
-      setError("Veuillez entrer une clé API valide.");
+      setError("Veuillez entrer une clé d' API valide.");
     }
   };
+
+  // var API_KEY="f91017a8a042da0d3b251a9187da7f97"
 
   return (
     <div>
