@@ -55,19 +55,23 @@ const App: React.FC = () => {
           <h1>Rechercher votre film préféré?</h1>
           <div className="search-bar">
             <form onSubmit={handleSearch}>
+            
+            {isLoading ? (
+                <button disabled>Recherche...</button>
+              ) : (
+                <button type="submit">Chercher</button>
+              )}
               <input
                 type="text"
                 placeholder="Enter a movie name"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              {isLoading ? (
-                <button disabled>Searching...</button>
-              ) : (
-                <button type="submit">Search</button>
-              )}
+              
             </form>
           </div>
+                <br />
+          <button>Deconnexion</button>
           <hr />
 
           {error && <div className="error-message">{error}</div>}
