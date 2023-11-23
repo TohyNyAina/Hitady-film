@@ -75,3 +75,7 @@ button:hover {
 .movie-item:hover {
   transform: scale(1.05);
 }
+
+.api-key-form {
+  text-align: center;
+}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../src/styles/movie-search.css"
 
 const ApiKeyForm: React.FC<{ onSubmit: (apiKey: string) => void }> = ({ onSubmit }) => {
   const [userApiKey, setUserApiKey] = useState<string>("");
@@ -28,16 +29,16 @@ const ApiKeyForm: React.FC<{ onSubmit: (apiKey: string) => void }> = ({ onSubmit
 
   return (
     <div>
-      <h2>Entrez votre clé API</h2>
+      <h2 className="api-key-form">Entrez votre clé API</h2>
       <form onSubmit={handleApiKeySubmit} className="api-key-form">
         <input
           type="text"
           placeholder="Votre clé API"
           value={userApiKey}
           onChange={(e) => setUserApiKey(e.target.value)}
-        />
+        /> <br /> <br />
         {error && <div className="error-message">{error}</div>}
-        <button type="submit">Soumettre</button>
+        <button type="submit">Se Connecter</button>
       </form>
     </div>
   );
