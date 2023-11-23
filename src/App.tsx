@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './styles/movie-search.css';
-import ApiKeyForm from "./ApiKeyForm"; // Importez votre composant ApiKeyForm
+import ApiKeyForm from "./ApiKeyForm"; 
 import { searchMoviesWithUserApiKey } from "./api/moovie";
 
 const App: React.FC = () => {
@@ -9,7 +9,6 @@ const App: React.FC = () => {
   const [movies, setMovies] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [apiKey, setApiKey] = useState<string | null>(null);
-
 
   useEffect(() => {
     const savedApiKey = localStorage.getItem('apikey');
@@ -37,13 +36,19 @@ const App: React.FC = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('apikey');
+    setApiKey(null);
+    window.location.reload(); 
+  };
+
   function truncateOverview(overview: string, wordLimit: number): string {
     const words = overview.split(" ");
-  
+
     if (words.length <= wordLimit) {
       return overview;
     }
-  
+
     const truncatedText = words.slice(0, wordLimit).join(" ");
     return `${truncatedText} ...`;
   }
@@ -55,8 +60,7 @@ const App: React.FC = () => {
           <h1>Rechercher votre film préféré?</h1>
           <div className="search-bar">
             <form onSubmit={handleSearch}>
-            
-            {isLoading ? (
+              {isLoading ? (
                 <button disabled>Recherche...</button>
               ) : (
                 <button type="submit">Chercher</button>
@@ -67,11 +71,10 @@ const App: React.FC = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-              
             </form>
           </div>
-                <br />
-          <button>Deconnexion</button>
+          <br />
+          <button onClick={handleLogout} className="center-button">Déconnexion</button>
           <hr />
 
           {error && <div className="error-message">{error}</div>}
